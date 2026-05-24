@@ -40,30 +40,33 @@ The application allows temple administrators to showcase visual galleries, annou
 
 ```bash
 Bhagwan-Vishwakarma-Mandir/
-├── admin/                 # Admin Dashboard controllers, login and dashboard panels
-├── api/                   # Async API endpoints for dynamic features and contact forms
-├── assets/                # Statics: styling sheet, vanilla scripts, icons, metadata
-│   ├── css/
-│   │   └── style.css      # Core style variables, themes, responsive tweaks, and fonts
-│   ├── js/
-│   │   └── main.js        # Main initialization scripts, animations, and GLightbox rules
-│   └── images/            # Standard UI logos, icons, and system banners
-├── database/              # SQL schemas and historical database updates
-│   ├── schema.sql         # Base database setup, default parameters, and initial tables
-│   ├── seed_gallery.sql   # Seeding parameters for visual gallery items
-│   ├── update_events.sql  # Event title migration queries
-│   └── update_events_hi.sql# Hindi dynamic descriptions translations seed
-├── includes/              # Shared core components and utility logic
-│   ├── config/            # Site configs, db keys, timezones, and definitions
+├── backend/               # Server-side controllers, configuration, and API logic
+│   ├── admin/             # Admin Dashboard controllers, login, and dashboard panels
+│   ├── api/               # Async API endpoints for dynamic features and contact forms
+│   ├── config/            # Site configurations, db keys, path constants, and parameters
 │   │   ├── config.php     # Core global parameters, uploads, and rate limits
 │   │   ├── constants.php  # Path shortcuts (BVM_ROOT, PAGES_PATH, TEMPLATES_PATH)
 │   │   └── payment.php    # Virtual booking currency & checkout helpers
-│   ├── functions/         # Core helper libraries (Security, Auth, DB, Mail, Upload, SEO)
+│   └── functions/         # Core helper libraries (Security, Auth, DB, Mail, Upload, SEO)
+├── database/              # SQL schemas and historical migrations
+│   ├── migrations/        # Historical database update scripts and seed data
+│   │   ├── seed_gallery.sql # Seeding parameters for visual gallery items
+│   │   ├── update_events.sql # Event title migration queries
+│   │   └── update_events_hi.sql # Hindi dynamic descriptions translations seed
+│   └── schema.sql         # Base database setup, default parameters, and initial tables
+├── frontend/              # Client-side assets, layout templates, and pages
+│   ├── assets/            # Static resources (CSS stylesheets, Vanilla JS, images, icons)
+│   │   ├── css/
+│   │   │   └── style.css  # Core style variables, themes, responsive tweaks, and fonts
+│   │   ├── js/
+│   │   │   └── main.js    # Main initialization scripts, animations, and GLightbox rules
+│   │   └── images/        # Standard UI logos, icons, and system banners
+│   ├── lang/              # Localization Dictionaries
+│   │   ├── en.php         # English words and translations mapping array
+│   │   └── hi.php         # Hindi (Devanagari script) translations mapping array
+│   ├── pages/             # Front-facing page controllers (Home, About, Book Puja, Darshan, etc.)
 │   └── templates/         # Modular layout segments (Header, Navigation, Footer, Modals)
-├── lang/                  # Localization Dictionaries
-│   ├── en.php             # English words and translations mapping array
-│   └── hi.php             # Hindi (Devanagari script) translations mapping array
-├── pages/                 # Front-facing content pages (Home, About, Book-Puja, Darshan, etc.)
+├── logs/                  # System log directory
 ├── uploads/               # Dynamic directory containing admin/user uploads
 │   ├── events/            # Local high-res event banners
 │   └── gallery/           # Gallery album photographs
@@ -111,15 +114,15 @@ Make sure the folder is named exactly `Bhagwan-Vishwakarma-Mandir` so that the `
    ```bash
    mysql -u root -p --default-character-set=utf8mb4 bvm_temple < database/schema.sql
    ```
-4. Import the subsequent gallery and event updates to ensure the application starts with beautiful pre-populated assets:
+4. Import the subsequent gallery and event updates from the `migrations` folder to ensure the application starts with beautiful pre-populated assets:
    ```bash
-   mysql -u root -p --default-character-set=utf8mb4 bvm_temple < database/seed_gallery.sql
-   mysql -u root -p --default-character-set=utf8mb4 bvm_temple < database/update_events.sql
-   mysql -u root -p --default-character-set=utf8mb4 bvm_temple < database/update_events_hi.sql
+   mysql -u root -p --default-character-set=utf8mb4 bvm_temple < database/migrations/seed_gallery.sql
+   mysql -u root -p --default-character-set=utf8mb4 bvm_temple < database/migrations/update_events.sql
+   mysql -u root -p --default-character-set=utf8mb4 bvm_temple < database/migrations/update_events_hi.sql
    ```
 
 ### Step 4: Verify Database Configurations
-Open [includes/config/config.php](file:///c:/xampp/htdocs/Bhagwan-Vishwakarma-Mandir/includes/config/config.php) and check the MySQL credentials. By default, it is configured for local development:
+Open [backend/config/config.php](file:///c:/xampp/htdocs/Bhagwan-Vishwakarma-Mandir/backend/config/config.php) and check the MySQL credentials. By default, it is configured for local development:
 ```php
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'bvm_temple');
@@ -147,7 +150,7 @@ http://localhost/Bhagwan-Vishwakarma-Mandir/admin/
 - **Default Administrator Username**: `admin`
 - **Default Administrator Password**: `admin123`
 
-*Note: In production environments, immediately modify the admin login password inside the `admins` database table using a `PASSWORD_HASH` check.*
+*Note: In production environments, immediately modify the admin login password inside the `admins` database table using a `PASSWORD_HASH` check. Although the folder is located at `backend/admin/` inside the repository, the `.htaccess` configuration cleanly handles access transparently through `/admin/` in the browser.*
 
 ---
 
@@ -157,10 +160,11 @@ This codebase has undergone extensive styling, character-set, and structural opt
 
 1. **Character Set Corrective Migration (Mojibake Fix)**: Resolved issues where Devanagari Hindi characters were double-encoded (`ÓÑ¡...`) due to incorrect import charsets. Standardized all SQL schemas with a strict `utf8mb4` character mapping, ensuring correct rendering of spiritual scripts.
 2. **Dynamic Bilingual Optimization**: Rectified missing dictionary keys across individual temple pages. Corrected `short_desc_hi` event descriptions to show correctly on localized subpages.
-3. **Responsive Card Layout Refactoring**: Fixed layout alignment bugs on the Events page where text overlapped on smaller screens. Refactored the `style.css` stylesheet to use flexible CSS columns (`flex-direction: column`) with relative/absolute object-fit parameters to prevent dynamic aspect ratio mismatches.
+3. **Responsive Card Layout Refactoring**: Fixed layout alignment bugs on the Events page where text overlapped on smaller screens. Refactored the stylesheet to use flexible CSS columns (`flex-direction: column`) with relative/absolute object-fit parameters to prevent dynamic aspect ratio mismatches.
 4. **Header Navigation Adjustments**: Fixed horizontal desktop navigation by adding `white-space: nowrap;` to key links (like "Contact Us"). This stops them from wrapping vertically on medium desktops.
 5. **Aesthetic Gap Removal**: Eliminated the unwanted 16px white gap below the header navigation menu by conditionally rendering the Bootstrap session alert containers only when alert messages actually exist.
 6. **Premium Visual Assets Integration**: Seeded high-definition custom graphics for OpenGraph standard shares (`og-image.jpg`), photo galleries (`uploads/gallery/`), and festival announcements (`uploads/events/`).
+7. **Clean Architectural Directory Restructuring**: Restructured the repository into distinct `backend` (server-side controllers, configuration, and core helpers) and `frontend` (client-side template partials, page layouts, translation dictionaries, and styled sheets) to decouple concerns and support modular scalability.
 
 ---
 
