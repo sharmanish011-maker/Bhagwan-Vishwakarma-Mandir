@@ -9,12 +9,12 @@
                 <div style="aspect-ratio:16/9;background:linear-gradient(135deg,var(--cream),rgba(212,175,55,0.1));display:flex;align-items:center;justify-content:center;">
                     <div class="text-center text-muted">
                         <i class="fas fa-play-circle" style="font-size:3rem;color:var(--saffron);"></i>
-                        <p class="mt-2 mb-0"><?= $lang === 'hi' ? 'वीडियो जल्द आ रहा है' : 'Video coming soon' ?></p>
+                        <p class="mt-2 mb-0"><?= __('common.video_coming_soon') ?></p>
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5><?= $lang === 'hi' ? 'मंदिर वीडियो ' . $i : 'Temple Video ' . $i ?></h5>
-                    <p class="text-muted small mb-0"><?= $lang === 'hi' ? 'यूट्यूब वीडियो यहाँ एम्बेड होगा' : 'YouTube video will be embedded here' ?></p>
+                    <h5><?= __('common.temple_video') . ' ' . $i ?></h5>
+                    <p class="text-muted small mb-0"><?= __('common.youtube_embed_here') ?></p>
                 </div>
             </div>
         </div>

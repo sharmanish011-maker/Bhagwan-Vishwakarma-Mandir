@@ -138,10 +138,8 @@ $lang = getCurrentLang();
                 </a>
             </div>
             <div class="col-lg-6 fade-in-right">
-                <div class="position-relative">
-                    <div class="gallery-placeholder" style="aspect-ratio: 4/3; font-size: 5rem; border-radius: 16px;">
-                        <span>🙏</span>
-                    </div>
+                <div class="position-relative animate-hover">
+                    <img src="<?= BASE_URL ?>/assets/images/about_vishwakarma.jpg" alt="Bhagwan Vishwakarma" class="img-fluid rounded-4 shadow-lg" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; border: 2px solid var(--gold); transition: transform 0.3s ease, box-shadow 0.3s ease;">
                     <!-- Decorative element -->
                     <div style="position: absolute; bottom: -15px; right: -15px; width: 120px; height: 120px; border: 3px solid var(--gold); border-radius: 16px; z-index: -1;"></div>
                 </div>
@@ -212,7 +210,7 @@ $lang = getCurrentLang();
                         <span class="month"><?= date('M', strtotime($event['start_date'])) ?></span>
                     </div>
                     <div class="card-body">
-                        <span class="event-category-badge"><?= e(ucfirst($event['category'])) ?></span>
+                        <span class="event-category-badge"><?= e(__('categories.' . $event['category'])) ?></span>
                         <h4 class="mt-2 mb-2"><?= e(getBilingualContent($event, 'title')) ?></h4>
                         <p class="text-muted mb-2">
                             <i class="fas fa-clock me-1"></i>

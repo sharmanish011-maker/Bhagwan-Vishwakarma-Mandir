@@ -37,8 +37,10 @@ $lang = getCurrentLang();
                 ?></p>
             </div>
             <div class="col-lg-6 fade-in-right">
-                <div class="gallery-placeholder" style="aspect-ratio: 3/4; font-size: 6rem; border-radius: 16px;">
-                    <span>🙏</span>
+                <div class="position-relative animate-hover">
+                    <img src="<?= BASE_URL ?>/assets/images/about_vishwakarma.jpg" alt="Bhagwan Vishwakarma" class="img-fluid rounded-4 shadow-lg" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border: 2px solid var(--gold); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <!-- Decorative element -->
+                    <div style="position: absolute; bottom: -15px; right: -15px; width: 120px; height: 120px; border: 3px solid var(--gold); border-radius: 16px; z-index: -1;"></div>
                 </div>
             </div>
         </div>

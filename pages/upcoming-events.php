@@ -5,7 +5,7 @@ try { $events = Database::query("SELECT * FROM events WHERE is_active = 1 AND st
     <?php if (!empty($events)): ?><div class="row g-4"><?php foreach ($events as $ev): ?>
     <div class="col-lg-6 fade-in-up"><div class="bvm-card"><div class="card-body">
         <div class="d-flex justify-content-between align-items-start mb-3">
-            <div><span class="event-category-badge"><?= e(ucfirst($ev['category'])) ?></span><?php if ($ev['is_featured']): ?><span class="badge bg-warning ms-1">⭐</span><?php endif; ?></div>
+            <div><span class="event-category-badge"><?= e(__('categories.' . $ev['category'])) ?></span><?php if ($ev['is_featured']): ?><span class="badge bg-warning ms-1">⭐</span><?php endif; ?></div>
             <div class="text-end"><small class="text-muted"><?= formatDateTime($ev['start_date']) ?></small></div>
         </div>
         <h4 class="text-maroon"><?= e(getBilingualContent($ev, 'title')) ?></h4>

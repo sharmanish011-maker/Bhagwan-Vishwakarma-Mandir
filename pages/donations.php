@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="text" name="donor_pan" class="form-control" maxlength="10" placeholder="ABCDE1234F">
                         </div>
                         <div class="col-12 mb-3">
-                            <label class="form-label"><?= $lang === 'hi' ? 'पता' : 'Address' ?></label>
+                            <label class="form-label"><?= __('common.address') ?></label>
                             <textarea name="donor_address" class="form-control" rows="2"></textarea>
                         </div>
                         <div class="col-12 mb-3">

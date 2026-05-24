@@ -28,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="col-md-6 mb-3"><label class="form-label"><?= __('contact.name') ?> *</label><input type="text" name="name" class="form-control" required></div>
                 <div class="col-md-6 mb-3"><label class="form-label"><?= __('contact.email') ?> *</label><input type="email" name="email" class="form-control" required></div>
                 <div class="col-md-6 mb-3"><label class="form-label"><?= __('contact.phone') ?> *</label><input type="tel" name="phone" class="form-control" required></div>
-                <div class="col-md-3 mb-3"><label class="form-label"><?= $lang === 'hi' ? 'आयु' : 'Age' ?></label><input type="number" name="age" class="form-control" min="16" max="80"></div>
-                <div class="col-md-3 mb-3"><label class="form-label"><?= $lang === 'hi' ? 'शहर' : 'City' ?></label><input type="text" name="city" class="form-control"></div>
-                <div class="col-md-6 mb-3"><label class="form-label"><?= __('volunteer.skills') ?></label><textarea name="skills" class="form-control" rows="3" placeholder="<?= $lang === 'hi' ? 'जैसे: इवेंट मैनेजमेंट, फोटोग्राफी, खाना बनाना...' : 'e.g., Event management, photography, cooking...' ?>"></textarea></div>
+                <div class="col-md-3 mb-3"><label class="form-label"><?= __('common.age') ?></label><input type="number" name="age" class="form-control" min="16" max="80"></div>
+                <div class="col-md-3 mb-3"><label class="form-label"><?= __('common.city') ?></label><input type="text" name="city" class="form-control"></div>
+                <div class="col-md-6 mb-3"><label class="form-label"><?= __('volunteer.skills') ?></label><textarea name="skills" class="form-control" rows="3" placeholder="<?= __('common.skills_placeholder') ?>"></textarea></div>
                 <div class="col-md-6 mb-3"><label class="form-label"><?= __('volunteer.availability') ?></label><select name="availability" class="form-select">
                     <option value="anytime"><?= __('volunteer.anytime') ?></option><option value="weekdays"><?= __('volunteer.weekdays') ?></option><option value="weekends"><?= __('volunteer.weekends') ?></option><option value="festivals"><?= __('volunteer.festivals') ?></option></select></div>
                 <div class="col-12 mb-3"><label class="form-label"><?= __('volunteer.experience') ?></label><textarea name="experience" class="form-control" rows="3"></textarea></div>

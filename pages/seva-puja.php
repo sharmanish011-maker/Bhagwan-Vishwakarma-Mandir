@@ -24,10 +24,10 @@ try {
         <!-- Category Filters -->
         <div class="filter-buttons fade-in-up">
             <button class="filter-btn active" data-category="all" data-target=".puja-filter-item"><?= __('common.all') ?></button>
-            <button class="filter-btn" data-category="daily" data-target=".puja-filter-item"><?= $lang === 'hi' ? 'दैनिक' : 'Daily' ?></button>
-            <button class="filter-btn" data-category="special" data-target=".puja-filter-item"><?= $lang === 'hi' ? 'विशेष' : 'Special' ?></button>
-            <button class="filter-btn" data-category="festival" data-target=".puja-filter-item"><?= $lang === 'hi' ? 'त्यौहार' : 'Festival' ?></button>
-            <button class="filter-btn" data-category="personal" data-target=".puja-filter-item"><?= $lang === 'hi' ? 'व्यक्तिगत' : 'Personal' ?></button>
+            <button class="filter-btn" data-category="daily" data-target=".puja-filter-item"><?= __('categories.daily') ?></button>
+            <button class="filter-btn" data-category="special" data-target=".puja-filter-item"><?= __('categories.special') ?></button>
+            <button class="filter-btn" data-category="festival" data-target=".puja-filter-item"><?= __('categories.festival') ?></button>
+            <button class="filter-btn" data-category="personal" data-target=".puja-filter-item"><?= __('categories.personal') ?></button>
         </div>
 
         <?php if (!empty($pujas)): ?>
@@ -40,7 +40,7 @@ try {
                     <p class="text-muted" style="font-size: 0.9rem;"><?= truncate(e(getBilingualContent($puja, 'description')), 120) ?></p>
                     <p class="puja-price"><?= formatCurrency((float) $puja['price']) ?></p>
                     <p class="puja-duration"><i class="fas fa-clock me-1"></i><?= e($puja['duration'] ?? '') ?></p>
-                    <span class="event-category-badge mb-3 d-inline-block"><?= e(ucfirst($puja['category'])) ?></span><br>
+                    <span class="event-category-badge mb-3 d-inline-block"><?= e(__('categories.' . $puja['category'])) ?></span><br>
                     <a href="<?= BASE_URL ?>/book-puja?puja_id=<?= $puja['id'] ?>" class="btn btn-primary-saffron">
                         <i class="fas fa-calendar-check me-1"></i><?= __('booking.submit') ?>
                     </a>

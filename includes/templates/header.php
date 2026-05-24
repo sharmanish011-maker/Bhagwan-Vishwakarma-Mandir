@@ -61,6 +61,11 @@ $ogImage = $ogImage ?? IMAGES_URL . '/og-image.jpg';
 
     <!-- Google Analytics -->
     <?= getAnalyticsScript() ?>
+
+    <!-- Global Base URL for AJAX/JS -->
+    <script>
+        window.BASE_URL = '<?= BASE_URL ?>';
+    </script>
 </head>
 <body class="<?= isset($bodyClass) ? e($bodyClass) : '' ?>">
 
@@ -74,9 +79,11 @@ $ogImage = $ogImage ?? IMAGES_URL . '/og-image.jpg';
     <?php require_once TEMPLATES_PATH . '/navbar.php'; ?>
 
     <!-- Flash Messages -->
-    <div class="container mt-3">
-        <?= displayFlash() ?>
-    </div>
+    <?php if (isset($_SESSION['flash'])): ?>
+        <div class="container mt-3">
+            <?= displayFlash() ?>
+        </div>
+    <?php endif; ?>
 
     <!-- Main Content -->
     <main id="main-content">

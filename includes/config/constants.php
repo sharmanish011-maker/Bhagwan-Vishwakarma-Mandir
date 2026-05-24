@@ -32,7 +32,22 @@ define('ASSETS_PATH', BVM_ROOT . '/assets');
 // =====================================================
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-define('BASE_URL', $protocol . '://' . $host . '/BVM');
+
+// Dynamically determine project subfolder relative to DOCUMENT_ROOT
+$rootPath = str_replace('\\', '/', BVM_ROOT);
+$docRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? '');
+$subFolder = '';
+if (!empty($docRoot) && stripos($rootPath, $docRoot) === 0) {
+    $subFolder = substr($rootPath, strlen($docRoot));
+} else {
+    $subFolder = '/Bhagwan-Vishwakarma-Mandir';
+}
+$subFolder = '/' . trim(str_replace('\\', '/', $subFolder), '/');
+if ($subFolder === '/') {
+    $subFolder = '';
+}
+
+define('BASE_URL', $protocol . '://' . $host . $subFolder);
 define('ASSETS_URL', BASE_URL . '/assets');
 define('CSS_URL', ASSETS_URL . '/css');
 define('JS_URL', ASSETS_URL . '/js');

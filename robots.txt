@@ -6,15 +6,15 @@ User-agent: *
 Allow: /
 
 # Block admin area
-Disallow: /BVM/admin/
-Disallow: /BVM/includes/
-Disallow: /BVM/database/
-Disallow: /BVM/api/
-Disallow: /BVM/lang/
+Disallow: /Bhagwan-Vishwakarma-Mandir/admin/
+Disallow: /Bhagwan-Vishwakarma-Mandir/includes/
+Disallow: /Bhagwan-Vishwakarma-Mandir/database/
+Disallow: /Bhagwan-Vishwakarma-Mandir/api/
+Disallow: /Bhagwan-Vishwakarma-Mandir/lang/
 
 # Allow assets and uploads
-Allow: /BVM/assets/
-Allow: /BVM/uploads/
+Allow: /Bhagwan-Vishwakarma-Mandir/assets/
+Allow: /Bhagwan-Vishwakarma-Mandir/uploads/
 
 # Sitemap
-Sitemap: https://www.bvm-temple.com/BVM/sitemap.xml
+Sitemap: https://www.bvm-temple.com/Bhagwan-Vishwakarma-Mandir/sitemap.xml

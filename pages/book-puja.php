@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="booking-step-connector"></div>
                     <div class="booking-step"><span class="step-number">2</span> <?= __('booking.select_date') ?></div>
                     <div class="booking-step-connector"></div>
-                    <div class="booking-step"><span class="step-number">3</span> Details</div>
+                    <div class="booking-step"><span class="step-number">3</span> <?= __('common.details') ?></div>
                     <div class="booking-step-connector"></div>
                     <div class="booking-step"><span class="step-number">4</span> <?= __('booking.confirm') ?></div>
                 </div>
@@ -153,9 +153,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="date" name="puja_date" class="form-control" min="<?= date('Y-m-d', strtotime('+1 day')) ?>" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label"><?= $lang === 'hi' ? 'पसंदीदा समय' : 'Preferred Time' ?></label>
+                            <label class="form-label"><?= __('common.preferred_time') ?></label>
                             <select name="puja_time" class="form-select">
-                                <option value=""><?= $lang === 'hi' ? 'मंदिर तय करेगा' : 'Temple will decide' ?></option>
+                                <option value=""><?= __('common.temple_decide') ?></option>
                                 <option value="06:00"><?= $lang === 'hi' ? 'प्रातः 6:00 बजे' : 'Morning 6:00 AM' ?></option>
                                 <option value="09:00"><?= $lang === 'hi' ? 'प्रातः 9:00 बजे' : 'Morning 9:00 AM' ?></option>
                                 <option value="11:00"><?= $lang === 'hi' ? 'दोपहर 11:00 बजे' : 'Morning 11:00 AM' ?></option>

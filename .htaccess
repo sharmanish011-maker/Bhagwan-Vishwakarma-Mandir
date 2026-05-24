@@ -11,7 +11,7 @@ Options +FollowSymLinks
 # =====================================================
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /BVM/
+    RewriteBase /Bhagwan-Vishwakarma-Mandir/
 
     # Force HTTPS in production (uncomment when SSL is ready)
     # RewriteCond %{HTTPS} off
@@ -137,6 +137,6 @@ Options +FollowSymLinks
 # =====================================================
 # CUSTOM ERROR PAGES
 # =====================================================
-ErrorDocument 403 /BVM/index.php?url=error&code=403
-ErrorDocument 404 /BVM/index.php?url=error&code=404
-ErrorDocument 500 /BVM/index.php?url=error&code=500
+ErrorDocument 403 /Bhagwan-Vishwakarma-Mandir/index.php?url=error&code=403
+ErrorDocument 404 /Bhagwan-Vishwakarma-Mandir/index.php?url=error&code=404
+ErrorDocument 500 /Bhagwan-Vishwakarma-Mandir/index.php?url=error&code=500

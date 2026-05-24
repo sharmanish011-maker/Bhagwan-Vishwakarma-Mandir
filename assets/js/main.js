@@ -422,8 +422,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // =====================================================
     // 15. BASE URL FOR AJAX
     // =====================================================
-    const baseUrlMeta = document.querySelector('link[rel="canonical"]');
-    window.BASE_URL = baseUrlMeta ? new URL(baseUrlMeta.href).origin + '/BVM' : '/BVM';
+    if (!window.BASE_URL) {
+        const baseUrlMeta = document.querySelector('link[rel="canonical"]');
+        window.BASE_URL = baseUrlMeta ? new URL(baseUrlMeta.href).origin + '/BVM' : '/BVM';
+    }
 
     // =====================================================
     // 16. FORM INPUT ANIMATIONS
