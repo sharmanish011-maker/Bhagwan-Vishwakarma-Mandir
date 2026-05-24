@@ -13,17 +13,17 @@ define('BVM_ROOT', __DIR__);
 // =====================================================
 // BOOTSTRAP: Load configuration and core files
 // =====================================================
-require_once BVM_ROOT . '/includes/config/constants.php';
-require_once BVM_ROOT . '/includes/config/config.php';
-require_once INCLUDES_PATH . '/functions/database.php';
-require_once INCLUDES_PATH . '/functions/security.php';
-require_once INCLUDES_PATH . '/functions/helpers.php';
-require_once INCLUDES_PATH . '/functions/auth.php';
-require_once INCLUDES_PATH . '/functions/seo.php';
-require_once INCLUDES_PATH . '/functions/language.php';
-require_once INCLUDES_PATH . '/functions/upload.php';
-require_once INCLUDES_PATH . '/functions/mail.php';
-require_once INCLUDES_PATH . '/config/payment.php';
+require_once BVM_ROOT . '/backend/config/constants.php';
+require_once BVM_ROOT . '/backend/config/config.php';
+require_once FUNCTIONS_PATH . '/database.php';
+require_once FUNCTIONS_PATH . '/security.php';
+require_once FUNCTIONS_PATH . '/helpers.php';
+require_once FUNCTIONS_PATH . '/auth.php';
+require_once FUNCTIONS_PATH . '/seo.php';
+require_once FUNCTIONS_PATH . '/language.php';
+require_once FUNCTIONS_PATH . '/upload.php';
+require_once FUNCTIONS_PATH . '/mail.php';
+require_once CONFIG_PATH . '/payment.php';
 
 
 // =====================================================

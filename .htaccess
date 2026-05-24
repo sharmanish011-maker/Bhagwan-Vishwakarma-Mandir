@@ -18,13 +18,19 @@ Options +FollowSymLinks
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Block access to sensitive directories
-    RewriteRule ^includes/ - [F,L]
+    RewriteRule ^backend/config/ - [F,L]
+    RewriteRule ^backend/functions/ - [F,L]
     RewriteRule ^database/ - [F,L]
-    RewriteRule ^lang/ - [F,L]
     RewriteRule ^logs/ - [F,L]
 
-    # Allow direct access to admin, assets, uploads, api
-    RewriteRule ^(admin|assets|uploads|api)/ - [L]
+    # Redirect /admin to /admin/ (with trailing slash) so relative links in admin work
+    RewriteRule ^admin$ admin/ [R=301,L]
+
+    # Rewrite /admin/ requests to the new backend/admin/ location internally
+    RewriteRule ^admin/(.*)$ backend/admin/$1 [QSA,L]
+
+    # Allow direct access to assets, uploads, api
+    RewriteRule ^(assets|uploads|api)/ - [L]
 
     # Don't rewrite existing files or directories
     RewriteCond %{REQUEST_FILENAME} !-f

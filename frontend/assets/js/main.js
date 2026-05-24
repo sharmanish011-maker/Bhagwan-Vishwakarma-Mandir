@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         backToTop.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            smoothScrollTo(0, 800);
         });
     }
 
@@ -362,20 +362,109 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // =====================================================
-    // 13. SMOOTH SCROLL FOR ANCHOR LINKS
+    // 13. ULTRA-PREMIUM SMOOTH SCROLL ENGINE
     // =====================================================
-    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+    function smoothScrollTo(target, duration = 800) {
+        let targetPosition;
+        if (typeof target === 'number') {
+            targetPosition = target;
+        } else if (target instanceof HTMLElement) {
+            const navbar = document.getElementById('mainNavbar');
+            let headerOffset = 0;
+            if (navbar) {
+                headerOffset += navbar.offsetHeight;
+            }
+            targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        } else {
+            return;
+        }
+        
+        const startPosition = window.scrollY;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
 
-            const target = document.querySelector(targetId);
+        // Custom Cubic Ease-InOut easing function for ultra-premium feel
+        function easeInOutCubic(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t * t + b;
+            t -= 2;
+            return c / 2 * (t * t * t + 2) + b;
+        }
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            } else {
+                window.scrollTo(0, targetPosition);
+            }
+        }
+
+        requestAnimationFrame(animation);
+    }
+
+    // Intercept same-page hash links (local and absolute same-origin/same-path)
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (!link) return;
+        
+        // Skip links that are for Bootstrap interactive components or accessibility
+        if (
+            link.classList.contains('skip-link') ||
+            link.hasAttribute('data-bs-toggle') ||
+            link.hasAttribute('data-bs-slide') ||
+            link.getAttribute('role') === 'tab'
+        ) {
+            return;
+        }
+
+        const href = link.getAttribute('href');
+        if (!href) return;
+        
+        if (href.startsWith('#')) {
+            if (href === '#') return;
+            const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                smoothScrollTo(target, 1000); // Luxurious 1s cinematic scroll
             }
-        });
+        } else if (href.includes('#')) {
+            try {
+                const url = new URL(link.href, window.location.href);
+                if (url.origin === window.location.origin && url.pathname === window.location.pathname) {
+                    const target = document.querySelector(url.hash);
+                    if (target) {
+                        e.preventDefault();
+                        smoothScrollTo(target, 1000);
+                    }
+                }
+            } catch (err) {
+                // Ignore URL parsing errors
+            }
+        }
     });
+
+    // Premium onload scroll entrance for hash URLs
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            // Instantly reset scroll to top to prevent default jumping
+            window.scrollTo(0, 0);
+            
+            // Perform smooth scroll after window assets have loaded
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    smoothScrollTo(target, 1200); // 1.2s luxurious page load entry scroll
+                }, 300);
+            });
+        }
+    }
+
+    // Make smoothScrollTo available globally if needed
+    window.smoothScrollTo = smoothScrollTo;
 
     // =====================================================
     // 14. TOAST NOTIFICATION HELPER

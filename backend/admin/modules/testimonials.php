@@ -20,9 +20,11 @@ $testimonials = Database::query("SELECT * FROM testimonials ORDER BY created_at 
     <tr><td><?= e($t['name']) ?></td><td><?= e($t['location'] ?? '-') ?></td><td><?php for($i=0;$i<$t['rating'];$i++) echo '⭐'; ?></td><td><?= truncate(e($t['message_en'] ?? ''), 60) ?></td>
         <td><?= $t['is_approved'] ? '✅' : '⏳' ?></td><td><?= $t['is_featured'] ? '⭐' : '-' ?></td>
         <td>
-            <form method="POST" class="d-inline"><?= csrfField() ?><input type="hidden" name="test_id" value="<?= $t['id'] ?>"><input type="hidden" name="action" value="<?= $t['is_approved'] ? 'reject' : 'approve' ?>"><button class="btn btn-sm <?= $t['is_approved'] ? 'btn-outline-warning' : 'btn-outline-success' ?>"><?= $t['is_approved'] ? 'Unapprove' : 'Approve' ?></button></form>
-            <form method="POST" class="d-inline"><?= csrfField() ?><input type="hidden" name="test_id" value="<?= $t['id'] ?>"><input type="hidden" name="action" value="feature"><button class="btn btn-outline-warning btn-sm">⭐</button></form>
-            <form method="POST" class="d-inline" onsubmit="return confirm('Delete?')"><?= csrfField() ?><input type="hidden" name="test_id" value="<?= $t['id'] ?>"><input type="hidden" name="action" value="delete"><button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button></form>
+            <div class="d-flex gap-1 flex-nowrap">
+                <form method="POST" class="d-inline"><?= csrfField() ?><input type="hidden" name="test_id" value="<?= $t['id'] ?>"><input type="hidden" name="action" value="<?= $t['is_approved'] ? 'reject' : 'approve' ?>"><button class="btn btn-sm <?= $t['is_approved'] ? 'btn-outline-warning' : 'btn-outline-success' ?>"><?= $t['is_approved'] ? 'Unapprove' : 'Approve' ?></button></form>
+                <form method="POST" class="d-inline"><?= csrfField() ?><input type="hidden" name="test_id" value="<?= $t['id'] ?>"><input type="hidden" name="action" value="feature"><button class="btn btn-outline-warning btn-sm">⭐</button></form>
+                <form method="POST" class="d-inline" onsubmit="return confirm('Delete?')"><?= csrfField() ?><input type="hidden" name="test_id" value="<?= $t['id'] ?>"><input type="hidden" name="action" value="delete"><button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button></form>
+            </div>
         </td>
     </tr>
     <?php endforeach; ?>

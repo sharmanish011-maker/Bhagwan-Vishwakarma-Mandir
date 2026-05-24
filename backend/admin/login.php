@@ -2,18 +2,18 @@
 /**
  * Admin Login Page
  */
-define('BVM_ROOT', dirname(__DIR__));
-require_once BVM_ROOT . '/includes/config/config.php';
-require_once BVM_ROOT . '/includes/config/constants.php';
-require_once BVM_ROOT . '/includes/functions/database.php';
-require_once BVM_ROOT . '/includes/functions/security.php';
-require_once BVM_ROOT . '/includes/functions/helpers.php';
-require_once BVM_ROOT . '/includes/functions/auth.php';
+define('BVM_ROOT', dirname(dirname(__DIR__)));
+require_once BVM_ROOT . '/backend/config/config.php';
+require_once BVM_ROOT . '/backend/config/constants.php';
+require_once FUNCTIONS_PATH . '/database.php';
+require_once FUNCTIONS_PATH . '/security.php';
+require_once FUNCTIONS_PATH . '/helpers.php';
+require_once FUNCTIONS_PATH . '/auth.php';
 session_start();
 setSecurityHeaders();
 
 // Already logged in?
-if (isAdmin()) { header('Location: index.php'); exit; }
+if (isAdminLoggedIn()) { header('Location: index.php'); exit; }
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -23,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = sanitize($_POST['username'] ?? '');
         $password = $_POST['password'] ?? '';
         $result = adminLogin($username, $password);
-        if ($result === true) {
+        if ($result['success'] === true) {
             header('Location: index.php');
             exit;
         } else {
-            $error = $result;
+            $error = $result['message'];
         }
     }
 }

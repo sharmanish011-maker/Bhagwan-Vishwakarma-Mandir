@@ -26,8 +26,8 @@ function adminLogin(string $username, string $password): array
 
     // Find admin by username or email
     $admin = Database::queryOne(
-        "SELECT * FROM admins WHERE (username = :username OR email = :username) AND is_active = 1",
-        ['username' => $username]
+        "SELECT * FROM admins WHERE (username = :username OR email = :email) AND is_active = 1",
+        ['username' => $username, 'email' => $username]
     );
 
     if (!$admin) {

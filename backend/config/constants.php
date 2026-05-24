@@ -13,19 +13,21 @@ if (!defined('BVM_ROOT')) {
 // =====================================================
 // PATH CONSTANTS
 // =====================================================
-define('INCLUDES_PATH', BVM_ROOT . '/includes');
-define('CONFIG_PATH', INCLUDES_PATH . '/config');
-define('FUNCTIONS_PATH', INCLUDES_PATH . '/functions');
-define('MODELS_PATH', INCLUDES_PATH . '/models');
-define('TEMPLATES_PATH', INCLUDES_PATH . '/templates');
-define('PAGES_PATH', BVM_ROOT . '/pages');
-define('ADMIN_PATH', BVM_ROOT . '/admin');
+define('BACKEND_PATH', BVM_ROOT . '/backend');
+define('INCLUDES_PATH', BACKEND_PATH); // Backward compatibility alias
+define('CONFIG_PATH', BACKEND_PATH . '/config');
+define('FUNCTIONS_PATH', BACKEND_PATH . '/functions');
+define('MODELS_PATH', BACKEND_PATH . '/models');
+define('FRONTEND_PATH', BVM_ROOT . '/frontend');
+define('TEMPLATES_PATH', FRONTEND_PATH . '/templates');
+define('PAGES_PATH', FRONTEND_PATH . '/pages');
+define('ADMIN_PATH', BACKEND_PATH . '/admin');
 define('UPLOADS_PATH', BVM_ROOT . '/uploads');
 define('GALLERY_UPLOAD_PATH', UPLOADS_PATH . '/gallery');
 define('GALLERY_PATH', GALLERY_UPLOAD_PATH); // Alias
 define('EVENTS_UPLOAD_PATH', UPLOADS_PATH . '/events');
-define('LANG_PATH', BVM_ROOT . '/lang');
-define('ASSETS_PATH', BVM_ROOT . '/assets');
+define('LANG_PATH', FRONTEND_PATH . '/lang');
+define('ASSETS_PATH', FRONTEND_PATH . '/assets');
 
 // =====================================================
 // URL CONSTANTS
@@ -48,7 +50,7 @@ if ($subFolder === '/') {
 }
 
 define('BASE_URL', $protocol . '://' . $host . $subFolder);
-define('ASSETS_URL', BASE_URL . '/assets');
+define('ASSETS_URL', BASE_URL . '/frontend/assets');
 define('CSS_URL', ASSETS_URL . '/css');
 define('JS_URL', ASSETS_URL . '/js');
 define('IMAGES_URL', ASSETS_URL . '/images');

@@ -23,7 +23,11 @@
         </ul>
     </div>
     <div class="col-lg-5 fade-in-right">
-        <div class="gallery-placeholder mb-4" style="aspect-ratio:3/4;font-size:5rem;border-radius:16px;"><span>🛕</span></div>
+        <div class="position-relative animate-hover mb-4">
+            <img src="<?= IMAGES_URL ?>/darshan_temple.png" alt="Bhagwan Vishwakarma Mandir Facade" class="img-fluid rounded-4 shadow-lg" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border: 2px solid var(--gold); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <!-- Decorative outline background element -->
+            <div style="position: absolute; bottom: -15px; right: -15px; width: 120px; height: 120px; border: 3px solid var(--gold); border-radius: 16px; z-index: -1;"></div>
+        </div>
         <div class="text-center">
             <a href="<?= BASE_URL ?>/book-puja" class="btn btn-primary-saffron btn-lg"><i class="fas fa-calendar-check me-2"></i><?= __('nav.book_puja') ?></a>
         </div>

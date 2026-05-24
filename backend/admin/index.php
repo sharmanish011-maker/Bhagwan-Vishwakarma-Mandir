@@ -2,18 +2,19 @@
 /**
  * Admin Panel — Main Controller
  */
-define('BVM_ROOT', dirname(__DIR__));
-require_once BVM_ROOT . '/includes/config/config.php';
-require_once BVM_ROOT . '/includes/config/constants.php';
-require_once BVM_ROOT . '/includes/functions/database.php';
-require_once BVM_ROOT . '/includes/functions/security.php';
-require_once BVM_ROOT . '/includes/functions/helpers.php';
-require_once BVM_ROOT . '/includes/functions/auth.php';
-require_once BVM_ROOT . '/includes/functions/seo.php';
-require_once BVM_ROOT . '/includes/functions/language.php';
-require_once BVM_ROOT . '/includes/functions/upload.php';
-require_once BVM_ROOT . '/includes/functions/mail.php';
-require_once BVM_ROOT . '/includes/config/payment.php';
+ob_start();
+define('BVM_ROOT', dirname(dirname(__DIR__)));
+require_once BVM_ROOT . '/backend/config/config.php';
+require_once BVM_ROOT . '/backend/config/constants.php';
+require_once FUNCTIONS_PATH . '/database.php';
+require_once FUNCTIONS_PATH . '/security.php';
+require_once FUNCTIONS_PATH . '/helpers.php';
+require_once FUNCTIONS_PATH . '/auth.php';
+require_once FUNCTIONS_PATH . '/seo.php';
+require_once FUNCTIONS_PATH . '/language.php';
+require_once FUNCTIONS_PATH . '/upload.php';
+require_once FUNCTIONS_PATH . '/mail.php';
+require_once CONFIG_PATH . '/payment.php';
 session_start();
 setSecurityHeaders();
 
@@ -46,7 +47,7 @@ $adminName = $adminUser['name'] ?? 'Admin';
         <div class="sidebar-header">
             <span class="sidebar-logo">ॐ</span>
             <div class="sidebar-brand">
-                <h5>BVM Admin</h5>
+                <h5><?= SITE_NAME ?></h5>
                 <small>Management Panel</small>
             </div>
         </div>
@@ -127,3 +128,4 @@ $adminName = $adminUser['name'] ?? 'Admin';
     </script>
 </body>
 </html>
+<?php ob_end_flush(); ?>

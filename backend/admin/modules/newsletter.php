@@ -6,18 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && validateCsrfToken()) {
         Database::execute("DELETE FROM newsletter_subscribers WHERE id = :id", ['id' => sanitizeInt($_POST['sub_id'])]);
         setFlash('success', 'Subscriber removed.');
     } elseif ($action === 'export') {
-        $subs = Database::query("SELECT email, created_at FROM newsletter_subscribers ORDER BY created_at DESC");
+        $subs = Database::query("SELECT email, subscribed_at FROM newsletter_subscribers ORDER BY subscribed_at DESC");
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="newsletter_subscribers_' . date('Y-m-d') . '.csv"');
         $out = fopen('php://output', 'w');
         fputcsv($out, ['Email', 'Subscribed On']);
-        foreach ($subs as $s) fputcsv($out, [$s['email'], $s['created_at']]);
+        foreach ($subs as $s) fputcsv($out, [$s['email'], $s['subscribed_at']]);
         fclose($out);
         exit;
     }
     redirect('index.php?module=newsletter');
 }
-$subscribers = Database::query("SELECT * FROM newsletter_subscribers ORDER BY created_at DESC");
+$subscribers = Database::query("SELECT * FROM newsletter_subscribers ORDER BY subscribed_at DESC");
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -26,9 +26,9 @@ $subscribers = Database::query("SELECT * FROM newsletter_subscribers ORDER BY cr
 </div>
 
 <div class="admin-table-card">
-    <div class="table-responsive"><table class="table table-hover"><thead><tr><th>#</th><th>Email</th><th>IP Address</th><th>Subscribed</th><th>Action</th></tr></thead><tbody>
+    <div class="table-responsive"><table class="table table-hover"><thead><tr><th>#</th><th>Email</th><th>Name</th><th>Subscribed</th><th>Action</th></tr></thead><tbody>
         <?php foreach ($subscribers as $i => $s): ?>
-        <tr><td><?= $i + 1 ?></td><td><?= e($s['email']) ?></td><td><?= e($s['ip_address'] ?? '-') ?></td><td><?= formatDateTime($s['created_at']) ?></td>
+        <tr><td><?= $i + 1 ?></td><td><?= e($s['email']) ?></td><td><?= e($s['name'] ?? '-') ?></td><td><?= formatDateTime($s['subscribed_at']) ?></td>
             <td><form method="POST" class="d-inline" onsubmit="return confirm('Remove subscriber?')"><?= csrfField() ?><input type="hidden" name="action" value="delete"><input type="hidden" name="sub_id" value="<?= $s['id'] ?>"><button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button></form></td>
         </tr>
         <?php endforeach; ?>

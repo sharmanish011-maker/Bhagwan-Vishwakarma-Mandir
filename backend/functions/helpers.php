@@ -304,3 +304,15 @@ function getCountdown(string $targetDate): array
         'expired' => false
     ];
 }
+
+/**
+ * Extract YouTube Video ID from URL
+ */
+function getYouTubeId(string $url): string|bool
+{
+    $pattern = '/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i';
+    if (preg_match($pattern, $url, $matches)) {
+        return $matches[1];
+    }
+    return false;
+}
