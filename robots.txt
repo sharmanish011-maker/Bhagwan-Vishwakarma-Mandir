@@ -1,0 +1,20 @@
+# =====================================================
+# Bhagwan Vishwakarma Mandir — Robots.txt
+# =====================================================
+
+User-agent: *
+Allow: /
+
+# Block admin area
+Disallow: /BVM/admin/
+Disallow: /BVM/includes/
+Disallow: /BVM/database/
+Disallow: /BVM/api/
+Disallow: /BVM/lang/
+
+# Allow assets and uploads
+Allow: /BVM/assets/
+Allow: /BVM/uploads/
+
+# Sitemap
+Sitemap: https://www.bvm-temple.com/BVM/sitemap.xml
